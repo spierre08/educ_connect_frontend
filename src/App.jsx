@@ -16,9 +16,12 @@ import Home from './Page';
 import Register from './register/Register';
 import SendOTPByPhone from './send-otp/Send-OTP';
 import OTPPage from './send-otp/Verifiy-OTP';
+// import Course from './serie-course/serie-course';
 import ChatProfessionnels2 from './student/forum/Chat1';
 import UserList2 from './student/forum/Liste1';
 import DashboardEleve from './student/Student';
+import CourseItem from './teacher/components/course.component';
+import CourseDetailPageTeacher from './teacher/components/detail-course';
 import ChatProfessionnels1 from './teacher/forum/chat';
 import UserList1 from './teacher/forum/Liste';
 import DashboardProfesseur from './teacher/Teacher';
@@ -33,6 +36,7 @@ function App() {
         <Route path="/admin/subject" element={<AdminSubject />}></Route>
         <Route path="/admin/class" element={<AdminClasse />}></Route>
         <Route path="/archive" element={<Archives />}></Route>
+        {/* <Route path="/archive/course" element={<Course />}></Route> */}
         <Route path="/auth" element={<Login />}></Route>
         <Route path="/auth/reset-password" element={<ResetPassword />}></Route>
         <Route path="/register" element={<Register />}></Route>
@@ -40,6 +44,11 @@ function App() {
         <Route path="/verify-otp" element={<OTPPage />}></Route>
         <Route path="/teacher" element={<DashboardProfesseur />}></Route>
         <Route path="/teacher/forum" element={<UserList1 />}></Route>
+        <Route path="/teacher/course" element={<CourseItem />}></Route>
+        <Route
+          path="/teacher/course/detail/:id"
+          element={<CourseDetailPageTeacher />}
+        ></Route>
         <Route
           path="/teacher/forum/chat/:id"
           element={<ChatProfessionnels1 />}

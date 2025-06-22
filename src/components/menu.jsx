@@ -28,7 +28,7 @@ export default function Menu() {
   return (
     <header className="bg-blue-900 text-white shadow-md">
       <div className="max-w-screen-xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold flex items-center">
+        <Link to="#" className="text-2xl font-bold flex items-center">
           <span className="text-blue-300">Edu</span>Connect
         </Link>
 

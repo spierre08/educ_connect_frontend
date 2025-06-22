@@ -1,10 +1,14 @@
 import { useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function useAuthRedirect() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -12,31 +16,26 @@ function useAuthRedirect() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!token || !refreshToken || !user) {
-      // Si l'utilisateur n'est pas connecté
       navigate("/auth");
       return;
     }
 
-    // Vérification du type d'utilisateur pour rediriger
-    switch (user.type_user) {
-      case "enseignant":
-        navigate("/teacher");
-        break;
-      case "élève":
-        navigate("/student");
-        break;
-      case "admin":
-        toast.info("Vous êtes connecté en tant qu'administrateur");
-        break;
-      default:
-        // Si l'utilisateur a un rôle inconnu
-        localStorage.clear();
-        navigate("/auth");
-        break;
-    }
-  }, [navigate]);
+    // Vérification du chemin pour éviter redirection inutile
+    const currentPath = location.pathname;
 
-  return null; // Ce hook ne retourne rien, il gère la redirection
+    if (user.type_user === "enseignant" && !currentPath.startsWith("/teacher")) {
+      navigate("/teacher");
+    } else if (user.type_user === "élève" && !currentPath.startsWith("/student")) {
+      navigate("/student");
+    } else if (user.type_user === "admin" && !currentPath.startsWith("/admin")) {
+      toast.info("Vous êtes connecté en tant qu'administrateur");
+    } else if (!["enseignant", "élève", "admin"].includes(user.type_user)) {
+      localStorage.clear();
+      navigate("/auth");
+    }
+  }, [navigate, location]);
+
+  return null;
 }
 
 export default useAuthRedirect;

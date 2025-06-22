@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 
 import axios from 'axios';
-import { FaPhoneAlt } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
 import {
   Link,
   useNavigate,
@@ -14,7 +14,7 @@ import {
 } from 'react-toastify';
 
 export default function SendOTPByPhone() {
-  const [formData, setFormData] = useState({ phone: "" });
+  const [formData, setFormData] = useState({ email: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Pour rediriger
 
@@ -25,8 +25,8 @@ export default function SendOTPByPhone() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.phone.trim()) {
-      toast.error("Veuillez saisir votre numéro de téléphone !");
+    if (!formData.email.trim()) {
+      toast.error("Veuillez saisir votre adresse mail !");
       return;
     }
 
@@ -34,15 +34,18 @@ export default function SendOTPByPhone() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4401/api/v1/auth/send-otp-by-phone",
-        { phone: formData.phone }
+        "http://localhost:4401/api/v1/auth/send-otp-by-email",
+        { email: formData.email }
       );
 
-      toast.success(`OTP envoyé au ${formData.phone}`);
+      console.log(response.data);
+      
+
+      toast.success(`OTP envoyé au ${formData.email}`);
 
       // Rediriger après un court délai pour laisser le toast s'afficher
       setTimeout(() => {
-        navigate("/verify-otp", { state: { phone: formData.phone } });
+        navigate("/verify-otp", { state: { phone: response.data.user.phone } });
       }, 2000);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
@@ -67,22 +70,22 @@ export default function SendOTPByPhone() {
       <form onSubmit={handleSubmit}>
         <div className="bg-white shadow-lg rounded-xl w-full max-w-md p-6 sm:p-8 space-y-6">
           <h2 className="text-xl sm:text-2xl font-semibold text-center text-gray-700">
-            Entrez votre numéro de téléphone pour recevoir un OTP
+            Entrez votre adresse mail pour recevoir un OTP
           </h2>
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
-              Numéro de téléphone
+              Adresse mail
             </label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-                <FaPhoneAlt className="text-xl" />
+                <Mail className="text-xl" />
               </span>
               <input
                 type="text"
-                placeholder="Entrez votre numéro de téléphone"
-                name="phone"
-                value={formData.phone}
+                placeholder="monemail@exemple.com"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
                 className="w-full pl-10 pr-4 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />

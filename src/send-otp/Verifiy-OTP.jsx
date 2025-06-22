@@ -53,7 +53,7 @@ const OTPPage = () => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:4401/api/v1/auth/verify-otp",
         {
           phone,
@@ -61,12 +61,12 @@ const OTPPage = () => {
         }
       );
 
-      if (data && data._id) {
+      if (response.data && response.data._id) {
         toast.success("OTP vérifié avec succès !");
 
         setTimeout(() => {
           navigate("/auth/reset-password", {
-            state: { userId: data._id }, // On transmet l'ID ici
+            state: { userId: response.data._id }, // On transmet l'ID ici
           });
         }, 1000);
       } else {

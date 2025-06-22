@@ -309,6 +309,13 @@ export default function DashboardProfesseur() {
           >
             Forum
           </Link>
+          <Link
+            href="#messages"
+            className="btn btn-link text-lg text-secondary hover:text-primary"
+            to={"/teacher/course"}
+          >
+            Mes séries de cours
+          </Link>
           <button
             onClick={() => setShowModal(true)}
             className="btn btn-link text-lg text-secondary hover:text-primary"
@@ -347,6 +354,13 @@ export default function DashboardProfesseur() {
               to={"/teacher/forum"}
             >
               Forum
+            </Link>
+            <Link
+              className="btn btn-link text-lg text-secondary hover:text-primary"
+              onClick={() => setMenuOpen(false)}
+              to={"/teacher/cours"}
+            >
+              Mes séries de cours
             </Link>
             <button
               onClick={() => {
