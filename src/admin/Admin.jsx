@@ -20,7 +20,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import { logout } from '../hooks/Logout';
+import { logout } from '../hooks/logout';
 import useAuthRedirect from '../hooks/useAuthRedirect';
 import DashboardStats from './components/statistic';
 import UserManager from './components/user-data';

@@ -15,7 +15,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import { logout } from '../../hooks/Logout';
+import { logout } from '../../hooks/logout';
 
 export default function MenuAdmin() {
   const [menuOpen, setMenuOpen] = useState(false);

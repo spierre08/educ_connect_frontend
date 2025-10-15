@@ -18,11 +18,11 @@ import SendOTPByPhone from './send-otp/Send-OTP';
 import OTPPage from './send-otp/Verifiy-OTP';
 // import Course from './serie-course/serie-course';
 import ChatProfessionnels2 from './student/forum/Chat1';
+import ChatProfessionnels1 from './teacher/forum/Chat';
 import UserList2 from './student/forum/Liste1';
 import DashboardEleve from './student/Student';
 import CourseItem from './teacher/components/course.component';
 import CourseDetailPageTeacher from './teacher/components/detail-course';
-import ChatProfessionnels1 from './teacher/forum/chat';
 import UserList1 from './teacher/forum/Liste';
 import DashboardProfesseur from './teacher/Teacher';
 

@@ -22,7 +22,7 @@ import {
   ToastContainer,
 } from 'react-toastify';
 
-import { logout } from '../hooks/Logout';
+import { logout } from '../hooks/logout';
 import useAuthRedirect from '../hooks/useAuthRedirect';
 
 const niveaux = ["Tous", "Maternelle", "Primaire", "Collège", "Lycée"];
